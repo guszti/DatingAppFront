@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HomeComponentInterface} from '../types/types';
+import {HomeComponentInterface} from './HomeComponentInterface';
 
 @Component({
     selector: 'app-home',
@@ -12,7 +12,7 @@ class HomeComponent implements OnInit, HomeComponentInterface {
     ngOnInit() {
     }
 
-    onRegister = () => {
+    setIsRegistering = () => {
         this.isRegistering = !this.isRegistering;
     };
 }

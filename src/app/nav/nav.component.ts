@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {NavComponentInterface} from '../types/types';
-import {AuthService, AuthServiceInterface} from '../service/auth.service';
+import {AuthService} from '../service/auth.service';
+import {NavComponentInterface} from './NavComponentInterface';
+import {AuthServiceInterface} from '../service/AuthServiceInterface';
 
 @Component({
     selector: 'app-nav',

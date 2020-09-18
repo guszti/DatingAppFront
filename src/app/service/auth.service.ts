@@ -1,12 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {LoginModel, LoginResponse} from '../types/types';
+import {LoginModel, LoginResponse} from '../types/commonTypes';
 import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-
-export interface AuthServiceInterface {
-    login: (model: LoginModel) => Observable<void>;
-}
+import {AuthServiceInterface} from './AuthServiceInterface';
 
 @Injectable({
     providedIn: 'root'

@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {RegisterComponentInterface} from '../types/types';
+import {Component, Input, OnInit} from '@angular/core';
+import {RegisterComponentInterface} from './RegisterComponentInterface';
 
 @Component({
     selector: 'app-register',
@@ -7,6 +7,8 @@ import {RegisterComponentInterface} from '../types/types';
     styleUrls: ['./register.component.css']
 })
 class RegisterComponent implements OnInit, RegisterComponentInterface {
+    @Input() setIsRegistering: () => void;
+
     model = {
         username: '',
         password: ''
@@ -19,6 +21,7 @@ class RegisterComponent implements OnInit, RegisterComponentInterface {
     };
 
     cancel = () => {
+        this.setIsRegistering();
     };
 }
 
