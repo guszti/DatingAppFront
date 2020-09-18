@@ -6,11 +6,15 @@ import {NavComponent} from './nav/nav.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from './service/auth.service';
+import RegisterComponent from './register/register.component';
+import HomeComponent from './home/home.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        NavComponent
+        NavComponent,
+        RegisterComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,

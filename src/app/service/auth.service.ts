@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {LoginModel, LoginResponse} from '../types/Api';
+import {LoginModel, LoginResponse} from '../types/types';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 

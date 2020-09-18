@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavComponentInterface} from '../types/Api';
+import {NavComponentInterface} from '../types/types';
 import {AuthService, AuthServiceInterface} from '../service/auth.service';
 
 @Component({
@@ -26,5 +26,9 @@ export class NavComponent implements OnInit, NavComponentInterface {
         this.authService.login(this.model).subscribe(next => {
             console.log('Logged in!');
         }, error => console.log('Failed to log in!'));
-    }
+    };
+
+    isLoggedIn = () => !!localStorage.getItem('token');
+
+    logOut = () => localStorage.removeItem('token');
 }
