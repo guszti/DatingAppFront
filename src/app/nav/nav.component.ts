@@ -14,17 +14,17 @@ export class NavComponent implements OnInit, NavComponentInterface {
         password: ''
     };
 
-    private authService: AuthServiceInterface;
+    private authServiceInterface: AuthServiceInterface;
 
     constructor(authService: AuthService) {
-        this.authService = authService;
+        this.authServiceInterface = authService;
     }
 
     ngOnInit() {
     }
 
     login = () => {
-        this.authService.login(this.model).subscribe(next => {
+        this.authServiceInterface.login(this.model).subscribe(next => {
             console.log('Logged in!');
         }, error => console.log('Failed to log in!'));
     };
