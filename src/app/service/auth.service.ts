@@ -28,4 +28,10 @@ export class AuthService implements AuthServiceInterface {
     register = (model: RegisterModel) => this.http.post(`${this.url}/register`, model);
 
     isLoggedIn = () => !this.jwtHelperService.isTokenExpired(localStorage.getItem('token'));
+
+    getUserNameFromToken = () => {
+        const decodedToken = this.jwtHelperService.decodeToken(localStorage.getItem('token'));
+
+        return decodedToken.unique_name;
+    };
 }

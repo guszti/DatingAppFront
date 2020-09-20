@@ -7,4 +7,6 @@ export interface AuthServiceInterface {
     register: (model: RegisterModel) => Observable<object>;
 
     isLoggedIn: () => boolean;
+
+    getUserNameFromToken: () => string;
 }
