@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {RegisterComponentInterface} from './RegisterComponentInterface';
 import {AuthServiceInterface} from '../service/AuthServiceInterface';
 import {AuthService} from '../service/auth.service';
+import {AlertifyServiceInterface} from '../service/AlertifyServiceInterface';
+import {AlertifyService} from '../service/alertify.service';
 
 @Component({
     selector: 'app-register',
@@ -17,16 +19,21 @@ class RegisterComponent implements OnInit, RegisterComponentInterface {
     };
 
     private authServiceInterface: AuthServiceInterface;
+    private alertifyServiceInterface: AlertifyServiceInterface;
 
-    constructor(authService: AuthService) {
+    constructor(authService: AuthService, alertifyServiceInterface: AlertifyService) {
         this.authServiceInterface = authService;
+        this.alertifyServiceInterface = alertifyServiceInterface;
     }
 
     ngOnInit() {
     }
 
     register = () => {
-        this.authServiceInterface.register(this.model).subscribe(() => console.log('Registered'), e => console.log(e));
+        this.authServiceInterface.register(this.model).subscribe(() =>
+                this.alertifyServiceInterface.success('Registered Successfully'),
+            e => this.alertifyServiceInterface.error(e)
+        );
     };
 
     cancel = () => {

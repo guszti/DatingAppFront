@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../service/auth.service';
 import {NavComponentInterface} from './NavComponentInterface';
 import {AuthServiceInterface} from '../service/AuthServiceInterface';
+import {AlertifyServiceInterface} from '../service/AlertifyServiceInterface';
+import {AlertifyService} from '../service/alertify.service';
 
 @Component({
     selector: 'app-nav',
@@ -16,8 +18,11 @@ export class NavComponent implements OnInit, NavComponentInterface {
 
     private authServiceInterface: AuthServiceInterface;
 
-    constructor(authService: AuthService) {
-        this.authServiceInterface = authService;
+    private alertifyServiceInterface: AlertifyServiceInterface;
+
+    constructor(authServiceInterface: AuthService, alertifyServiceInterface: AlertifyService) {
+        this.authServiceInterface = authServiceInterface;
+        this.alertifyServiceInterface = alertifyServiceInterface;
     }
 
     ngOnInit() {
@@ -25,11 +30,15 @@ export class NavComponent implements OnInit, NavComponentInterface {
 
     login = () => {
         this.authServiceInterface.login(this.model).subscribe(next => {
-            console.log('Logged in!');
-        }, error => console.log('Failed to log in!'));
+            this.alertifyServiceInterface.success('Logged In');
+        }, error => this.alertifyServiceInterface.error(error));
     };
 
     isLoggedIn = () => !!localStorage.getItem('token');
 
-    logOut = () => localStorage.removeItem('token');
+    logOut = () => {
+        localStorage.removeItem('token');
+
+        this.alertifyServiceInterface.message('Logged Out');
+    };
 }
