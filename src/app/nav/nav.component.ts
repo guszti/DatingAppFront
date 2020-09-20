@@ -34,7 +34,7 @@ export class NavComponent implements OnInit, NavComponentInterface {
         }, error => this.alertifyServiceInterface.error(error));
     };
 
-    isLoggedIn = () => !!localStorage.getItem('token');
+    isLoggedIn = () => this.authServiceInterface.isLoggedIn();
 
     logOut = () => {
         localStorage.removeItem('token');

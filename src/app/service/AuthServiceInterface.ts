@@ -5,4 +5,6 @@ export interface AuthServiceInterface {
     login: (model: LoginModel) => Observable<void>;
 
     register: (model: RegisterModel) => Observable<object>;
+
+    isLoggedIn: () => boolean;
 }
