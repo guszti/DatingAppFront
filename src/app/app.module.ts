@@ -17,6 +17,7 @@ import {MessagesComponent} from './messages/messages.component';
 import {ListsComponent} from './list/lists.component';
 import {RouterModule} from '@angular/router';
 import {appRoutes} from './routes';
+import { NotFoundComponent } from './errorPages/not-found/not-found.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {appRoutes} from './routes';
         HomeComponent,
         MembersComponent,
         MessagesComponent,
-        ListsComponent
+        ListsComponent,
+        NotFoundComponent
     ],
     imports: [
         BrowserModule,

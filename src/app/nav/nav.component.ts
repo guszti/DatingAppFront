@@ -30,12 +30,11 @@ export class NavComponent implements OnInit, NavComponentInterface {
     ngOnInit() {
     }
 
-    login = () => {
+    login = () =>
         this.authServiceInterface.login(this.model).subscribe(next => {
             this.router.navigate(['/members']);
             this.alertifyServiceInterface.success('Logged In');
-        }, error => this.alertifyServiceInterface.error(error));
-    };
+        });
 
     isLoggedIn = () => this.authServiceInterface.isLoggedIn();
 
