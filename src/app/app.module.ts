@@ -18,6 +18,7 @@ import {ListsComponent} from './list/lists.component';
 import {RouterModule} from '@angular/router';
 import {appRoutes} from './routes';
 import { NotFoundComponent } from './errorPages/not-found/not-found.component';
+import {ApiService} from './service/api.service';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { NotFoundComponent } from './errorPages/not-found/not-found.component';
     providers: [
         AuthService,
         ErrorInterceptorProvider,
-        AlertifyService
+        AlertifyService,
+        ApiService
     ],
     bootstrap: [AppComponent]
 })
