@@ -10,7 +10,7 @@ const headers = new HttpHeaders({
 @Injectable({
     providedIn: 'root'
 })
-export class ApiService implements ApiServiceInterface{
+export class ApiService implements ApiServiceInterface {
     private httpClient: HttpClient;
 
     private apiUrl: string = environment.apiUrl;
@@ -19,5 +19,9 @@ export class ApiService implements ApiServiceInterface{
         this.httpClient = httpClient;
     }
 
-    get = <T>(url: string) => this.httpClient.get<T>(`${this.apiUrl}${url}`, {headers});
+    get = <T>(url: string) =>
+        this.httpClient.get<T>(`${this.apiUrl}${url}`, {headers});
+
+    post = <T>(url: string, data: any) =>
+        this.httpClient.post<T>(`${this.apiUrl}${url}`, data, {headers});
 }
