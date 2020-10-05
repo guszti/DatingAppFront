@@ -3,12 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment.local';
 import {ApiServiceInterface} from './ApiServiceInterface';
 
-const headers = new HttpHeaders({
-    Authorization: `Bearer ${localStorage.getItem('token')}`
-});
-
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ApiService implements ApiServiceInterface {
     private httpClient: HttpClient;
@@ -20,8 +16,8 @@ export class ApiService implements ApiServiceInterface {
     }
 
     get = <T>(url: string) =>
-        this.httpClient.get<T>(`${this.apiUrl}${url}`, {headers});
+        this.httpClient.get<T>(`${this.apiUrl}${url}`);
 
     post = <T>(url: string, data: any) =>
-        this.httpClient.post<T>(`${this.apiUrl}${url}`, data, {headers});
+        this.httpClient.post<T>(`${this.apiUrl}${url}`, data);
 }

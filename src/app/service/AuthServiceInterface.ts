@@ -9,4 +9,6 @@ export interface AuthServiceInterface {
     isLoggedIn: () => boolean;
 
     getUserNameFromToken: () => string;
+
+    getJwtToken: () => string;
 }

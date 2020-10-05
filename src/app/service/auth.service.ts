@@ -6,6 +6,7 @@ import {AuthServiceInterface} from './AuthServiceInterface';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {ApiServiceInterface} from './ApiServiceInterface';
 import {ApiService} from './api.service';
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -13,17 +14,21 @@ import {ApiService} from './api.service';
 export class AuthService implements AuthServiceInterface {
     private apiServiceInterface: ApiServiceInterface;
     private jwtHelperService: JwtHelperService;
+    private router: Router;
 
-    constructor(http: HttpClient, apiServiceInterface: ApiService) {
+    constructor(http: HttpClient, apiServiceInterface: ApiService, router: Router) {
         this.apiServiceInterface = apiServiceInterface;
         this.jwtHelperService = new JwtHelperService();
+        this.router = router;
     }
 
     login = (model: LoginModel) =>
         this.apiServiceInterface.post<LoginResponse>('/auth/login', model)
             .pipe(map((response: LoginResponse) => {
                 if (response) {
-                    localStorage.setItem('token', response.token);
+                    localStorage.setItem('token', response.user.token);
+
+                    this.router.navigateByUrl('/home');
                 }
             }));
 
@@ -31,6 +36,8 @@ export class AuthService implements AuthServiceInterface {
         .post<{}>('/auth/register', model);
 
     isLoggedIn = () => !this.jwtHelperService.isTokenExpired(localStorage.getItem('token'));
+
+    getJwtToken = () => localStorage.getItem('token');
 
     getUserNameFromToken = () => {
         const decodedToken = this.jwtHelperService.decodeToken(localStorage.getItem('token'));

@@ -7,10 +7,10 @@ import {ApiUser} from '../types/commonTypes';
 @Component({
     selector: 'app-members',
     templateUrl: './members.component.html',
-    styleUrls: ['./members.component.css']
+    styleUrls: ['./members.component.css'],
 })
 export class MembersComponent implements MembersComponentInterface, OnInit {
-    members: ApiUser[];
+    users: ApiUser[];
 
     private apiServiceInterface: ApiServiceInterface;
 
@@ -22,6 +22,8 @@ export class MembersComponent implements MembersComponentInterface, OnInit {
         this.fetchMembers();
     }
 
-    fetchMembers = () => this.apiServiceInterface.get<ApiUser[]>('/users')
-        .subscribe(data => this.members = data);
+    fetchMembers = () =>
+        this.apiServiceInterface
+            .get<ApiUser[]>('/users')
+            .subscribe((data) => (this.users = data));
 }

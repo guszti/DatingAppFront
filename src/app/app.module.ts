@@ -17,8 +17,10 @@ import {MessagesComponent} from './messages/messages.component';
 import {ListsComponent} from './list/lists.component';
 import {RouterModule} from '@angular/router';
 import {appRoutes} from './routes';
-import { NotFoundComponent } from './errorPages/not-found/not-found.component';
+import {NotFoundComponent} from './errorPages/not-found/not-found.component';
 import {ApiService} from './service/api.service';
+import {MemberCardComponent} from './members/components/member.card/member.card.component';
+import {JwtInterceptorProvider} from './service/jwt.interceptor';
 
 @NgModule({
     declarations: [
@@ -29,7 +31,8 @@ import {ApiService} from './service/api.service';
         MembersComponent,
         MessagesComponent,
         ListsComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        MemberCardComponent
     ],
     imports: [
         BrowserModule,
@@ -43,7 +46,8 @@ import {ApiService} from './service/api.service';
         AuthService,
         ErrorInterceptorProvider,
         AlertifyService,
-        ApiService
+        ApiService,
+        JwtInterceptorProvider
     ],
     bootstrap: [AppComponent]
 })

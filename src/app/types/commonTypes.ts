@@ -9,7 +9,10 @@ export type RegisterModel = {
 };
 
 export type LoginResponse = {
-    token: string;
+    user: {
+        username: string;
+        token: string;
+    };
 };
 
 export enum Gender {
