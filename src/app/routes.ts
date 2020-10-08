@@ -5,6 +5,8 @@ import {MessagesComponent} from './messages/messages.component';
 import {ListsComponent} from './list/lists.component';
 import {AuthGuard} from './guards/auth.guard';
 import {NotFoundComponent} from './errorPages/not-found/not-found.component';
+import {MemberDetailComponent} from './members/components/member-detail/member-detail.component';
+import {MemberEditComponent} from './members/components/member-edit/member-edit.component';
 
 export const appRoutes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -16,7 +18,9 @@ export const appRoutes: Routes = [
         children: [
             {path: 'members', component: MembersComponent},
             {path: 'messages', component: MessagesComponent},
-            {path: 'lists', component: ListsComponent}
+            {path: 'lists', component: ListsComponent},
+            {path: 'members/:id', component: MemberDetailComponent},
+            {path: 'members/edit', component: MemberEditComponent}
         ]
     },
     {path: 'not-found', component: NotFoundComponent},

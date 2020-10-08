@@ -1,0 +1,59 @@
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from '../../../service/api.service';
+import {ApiServiceInterface} from '../../../service/ApiServiceInterface';
+import {ApiUser} from '../../../types/commonTypes';
+import {ActivatedRoute} from '@angular/router';
+import {NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions} from '@kolkov/ngx-gallery';
+
+@Component({
+    selector: 'app-member-detail',
+    templateUrl: './member-detail.component.html',
+    styleUrls: ['./member-detail.component.css']
+})
+export class MemberDetailComponent implements OnInit {
+    member: ApiUser;
+    galleryImages: NgxGalleryImage[];
+    galleryOptions: NgxGalleryOptions[] = [{
+        width: '500px',
+        height: '500px',
+        imagePercent: 100,
+        thumbnailsColumns: 4,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        preview: false
+    }];
+
+    private apiServiceInterface: ApiServiceInterface;
+    private activatedRoute: ActivatedRoute;
+
+    constructor(apiServiceInterface: ApiService, activatedRoute: ActivatedRoute) {
+        this.apiServiceInterface = apiServiceInterface;
+        this.activatedRoute = activatedRoute;
+    }
+
+    ngOnInit(): void {
+        this.fetchMember();
+    }
+
+    getImages = (member: ApiUser) => {
+        if (member?.photos) {
+            this.galleryImages = member.photos.map(item => ({
+                small: item.url,
+                medium: item.url,
+                big: item.url,
+            }));
+        }
+
+        return [];
+    }
+
+    fetchMember = () => {
+        const id = this.activatedRoute.snapshot.paramMap.get('id');
+
+        this.apiServiceInterface
+            .get<ApiUser>(`/users/${id}`)
+            .subscribe(member => {
+                this.member = member;
+                this.getImages(member);
+            });
+    }
+}

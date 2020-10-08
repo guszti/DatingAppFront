@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {MembersComponentInterface} from './MembersComponentInterface';
 import {ApiServiceInterface} from '../service/ApiServiceInterface';
 import {ApiService} from '../service/api.service';
 import {ApiUser} from '../types/commonTypes';
@@ -9,7 +8,7 @@ import {ApiUser} from '../types/commonTypes';
     templateUrl: './members.component.html',
     styleUrls: ['./members.component.css'],
 })
-export class MembersComponent implements MembersComponentInterface, OnInit {
+export class MembersComponent implements OnInit {
     users: ApiUser[];
 
     private apiServiceInterface: ApiServiceInterface;
@@ -18,12 +17,12 @@ export class MembersComponent implements MembersComponentInterface, OnInit {
         this.apiServiceInterface = apiServiceInterface;
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.fetchMembers();
     }
 
     fetchMembers = () =>
         this.apiServiceInterface
             .get<ApiUser[]>('/users')
-            .subscribe((data) => (this.users = data));
+            .subscribe((data) => (this.users = data))
 }

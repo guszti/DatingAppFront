@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../service/auth.service';
-import {NavComponentInterface} from './NavComponentInterface';
 import {AuthServiceInterface} from '../service/AuthServiceInterface';
 import {AlertifyServiceInterface} from '../service/AlertifyServiceInterface';
 import {AlertifyService} from '../service/alertify.service';
@@ -11,13 +10,13 @@ import {Router} from '@angular/router';
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit, NavComponentInterface {
+export class NavComponent implements OnInit {
     model = {
         username: '',
         password: ''
     };
 
-    private authServiceInterface: AuthServiceInterface;
+    authServiceInterface: AuthServiceInterface;
     private alertifyServiceInterface: AlertifyServiceInterface;
     private router: Router;
 
@@ -27,14 +26,14 @@ export class NavComponent implements OnInit, NavComponentInterface {
         this.router = router;
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
     }
 
     login = () =>
         this.authServiceInterface.login(this.model).subscribe(next => {
             this.router.navigate(['/members']);
             this.alertifyServiceInterface.success('Logged In');
-        });
+        })
 
     isLoggedIn = () => this.authServiceInterface.isLoggedIn();
 
@@ -43,5 +42,5 @@ export class NavComponent implements OnInit, NavComponentInterface {
 
         this.router.navigate(['/home']);
         this.alertifyServiceInterface.message('Logged Out');
-    };
+    }
 }

@@ -19,8 +19,12 @@ import {RouterModule} from '@angular/router';
 import {appRoutes} from './routes';
 import {NotFoundComponent} from './errorPages/not-found/not-found.component';
 import {ApiService} from './service/api.service';
-import {MemberCardComponent} from './members/components/member.card/member.card.component';
+import {MemberCardComponent} from './members/components/member-card/member-card.component';
 import {JwtInterceptorProvider} from './service/jwt.interceptor';
+import {MemberDetailComponent} from './members/components/member-detail/member-detail.component';
+import {MemberEditComponent} from './members/components/member-edit/member-edit.component';
+import {TabsModule} from 'ngx-bootstrap/tabs';
+import {NgxGalleryModule} from '@kolkov/ngx-gallery';
 
 @NgModule({
     declarations: [
@@ -32,7 +36,9 @@ import {JwtInterceptorProvider} from './service/jwt.interceptor';
         MessagesComponent,
         ListsComponent,
         NotFoundComponent,
-        MemberCardComponent
+        MemberCardComponent,
+        MemberDetailComponent,
+        MemberEditComponent
     ],
     imports: [
         BrowserModule,
@@ -40,7 +46,9 @@ import {JwtInterceptorProvider} from './service/jwt.interceptor';
         FormsModule,
         BsDropdownModule.forRoot(),
         BrowserAnimationsModule,
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes),
+        TabsModule.forRoot(),
+        NgxGalleryModule
     ],
     providers: [
         AuthService,

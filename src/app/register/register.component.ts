@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {RegisterComponentInterface} from './RegisterComponentInterface';
 import {AuthServiceInterface} from '../service/AuthServiceInterface';
 import {AuthService} from '../service/auth.service';
 import {AlertifyServiceInterface} from '../service/AlertifyServiceInterface';
@@ -10,7 +9,7 @@ import {AlertifyService} from '../service/alertify.service';
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.css']
 })
-class RegisterComponent implements OnInit, RegisterComponentInterface {
+class RegisterComponent implements OnInit {
     @Input() setIsRegistering: () => void;
 
     model = {
@@ -26,7 +25,7 @@ class RegisterComponent implements OnInit, RegisterComponentInterface {
         this.alertifyServiceInterface = alertifyServiceInterface;
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
     }
 
     register = () => {
@@ -34,11 +33,11 @@ class RegisterComponent implements OnInit, RegisterComponentInterface {
                 this.alertifyServiceInterface.success('Registered Successfully'),
             e => this.alertifyServiceInterface.error(e)
         );
-    };
+    }
 
     cancel = () => {
         this.setIsRegistering();
-    };
+    }
 }
 
 export default RegisterComponent;

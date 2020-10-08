@@ -35,6 +35,7 @@ export type ApiUser = {
     country: string;
     mainPhotoUrl: string;
     photos: ApiUserPhoto[];
+    createdAt: string;
 };
 
 export type ApiUserPhoto = {
