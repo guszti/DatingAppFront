@@ -25,6 +25,7 @@ import {MemberDetailComponent} from './members/components/member-detail/member-d
 import {MemberEditComponent} from './members/components/member-edit/member-edit.component';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {NgxGalleryModule} from '@kolkov/ngx-gallery';
+import { PhotoEditorComponent } from './members/components/photo-editor/photo-editor.component';
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import {NgxGalleryModule} from '@kolkov/ngx-gallery';
         NotFoundComponent,
         MemberCardComponent,
         MemberDetailComponent,
-        MemberEditComponent
+        MemberEditComponent,
+        PhotoEditorComponent
     ],
     imports: [
         BrowserModule,

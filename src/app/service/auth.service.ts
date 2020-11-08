@@ -39,9 +39,9 @@ export class AuthService implements AuthServiceInterface {
 
     getJwtToken = () => localStorage.getItem('token');
 
-    getUserNameFromToken = () => {
-        const decodedToken = this.jwtHelperService.decodeToken(localStorage.getItem('token'));
+    getDecodedJwtToken = () => this.jwtHelperService.decodeToken(this.getJwtToken());
 
-        return decodedToken.unique_name;
-    };
+    getUserNameFromToken = () => this.getDecodedJwtToken()?.unique_name;
+
+    getUserIdFromToken = () => this.getDecodedJwtToken()?.nameid;
 }

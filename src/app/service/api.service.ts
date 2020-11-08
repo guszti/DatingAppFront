@@ -20,4 +20,22 @@ export class ApiService implements ApiServiceInterface {
 
     post = <T>(url: string, data: any) =>
         this.httpClient.post<T>(`${this.apiUrl}${url}`, data);
+
+    put = (url: string, data: any) =>
+        this.httpClient.put(`${this.apiUrl}${url}`, data);
+
+    patch = (url: string, data: any) => {
+        const patchFieldObjects = [];
+
+        Object.keys(data).forEach(key => patchFieldObjects.push({
+            op: 'replace',
+            path: key,
+            value: data[key]
+        }));
+
+        return this.httpClient.patch(`${this.apiUrl}${url}`, patchFieldObjects);
+    };
+
+    delete = (url: string) =>
+        this.httpClient.delete(`${this.apiUrl}${url}`);
 }

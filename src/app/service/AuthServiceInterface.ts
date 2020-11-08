@@ -11,4 +11,8 @@ export interface AuthServiceInterface {
     getUserNameFromToken: () => string;
 
     getJwtToken: () => string;
+
+    getUserIdFromToken: () => number;
+
+    getDecodedJwtToken: () => any;
 }
