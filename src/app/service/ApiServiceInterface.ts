@@ -6,7 +6,7 @@ export interface ApiServiceInterface {
 
     post: <T>(url: string, data: any) => Observable<T>;
 
-    put: (url: string, data: any) => Observable<{}>;
+    put: (url: string, data?: any) => Observable<{}>;
 
     patch: (url: string, data: any) => Observable<{}>;
 

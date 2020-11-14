@@ -1,9 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiUser} from '../../../types/commonTypes';
+import {ApiUser, ApiUserPhoto} from '../../../types/commonTypes';
 import {FileUploader} from 'ng2-file-upload';
 import {environment} from '../../../../environments/environment.local';
 import {AuthService} from '../../../service/auth.service';
 import {AuthServiceInterface} from '../../../service/AuthServiceInterface';
+import {ApiServiceInterface} from '../../../service/ApiServiceInterface';
+import {ApiService} from '../../../service/api.service';
 
 @Component({
     selector: 'app-photo-editor',
@@ -16,9 +18,11 @@ export class PhotoEditorComponent implements OnInit {
     public uploader: FileUploader;
     public hasBaseDropZoneOver = false;
     private authService: AuthServiceInterface;
+    private apiService: ApiServiceInterface;
 
-    constructor(authService: AuthService) {
+    constructor(authService: AuthService, apiService: ApiService) {
         this.authService = authService;
+        this.apiService = apiService;
     }
 
     ngOnInit(): void {
@@ -27,7 +31,7 @@ export class PhotoEditorComponent implements OnInit {
 
     public fileOverBase = (e: any): void => {
         this.hasBaseDropZoneOver = e;
-    }
+    };
 
     private initializeUploader = () => {
         this.uploader = new FileUploader({
@@ -49,5 +53,15 @@ export class PhotoEditorComponent implements OnInit {
                 this.member.photos.push(JSON.parse(response));
             }
         };
+    };
+
+    public setPhotoMain = (photo: ApiUserPhoto) => {
+        this.apiService.put(`/users/set-main-photo/${photo.id}`).subscribe(() => {
+            this.member.mainPhotoUrl = photo.url;
+            localStorage.setItem('photoUrl', photo.url);
+            this.member.photos.forEach(item =>
+                item.id === photo.id ? item.isMain = true : item.isMain = false
+            );
+        });
     };
 }
