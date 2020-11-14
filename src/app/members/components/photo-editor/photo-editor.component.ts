@@ -56,12 +56,28 @@ export class PhotoEditorComponent implements OnInit {
     };
 
     public setPhotoMain = (photo: ApiUserPhoto) => {
-        this.apiService.put(`/users/set-main-photo/${photo.id}`).subscribe(() => {
-            this.member.mainPhotoUrl = photo.url;
-            localStorage.setItem('photoUrl', photo.url);
-            this.member.photos.forEach(item =>
-                item.id === photo.id ? item.isMain = true : item.isMain = false
-            );
-        });
+        try {
+            this.apiService.put(`/users/set-main-photo/${photo.id}`).subscribe(() => {
+                this.member.mainPhotoUrl = photo.url;
+                localStorage.setItem('photoUrl', photo.url);
+                this.member.photos.forEach(item =>
+                    item.id === photo.id ? item.isMain = true : item.isMain = false
+                );
+            });
+        } catch (e) {
+            console.error(e.message);
+        }
+    };
+
+    public removePhoto = (photo: ApiUserPhoto) => {
+        try {
+            this.apiService.delete(`/users/remove-photo/${photo.id}`).subscribe(() => {
+                this.member.photos = this.member.photos.filter(item =>
+                    item.id !== photo.id
+                );
+            });
+        } catch (e) {
+            console.error(e.message);
+        }
     };
 }
