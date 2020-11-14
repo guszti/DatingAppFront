@@ -10,8 +10,10 @@ export type RegisterModel = {
 
 export type LoginResponse = {
     user: {
+        id: number;
         username: string;
         token: string;
+        photoUrl: string;
     };
 };
 

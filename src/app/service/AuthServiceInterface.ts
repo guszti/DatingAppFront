@@ -15,4 +15,6 @@ export interface AuthServiceInterface {
     getUserIdFromToken: () => number;
 
     getDecodedJwtToken: () => any;
+
+    getMainPhoto: () => string;
 }
