@@ -14,7 +14,12 @@ class RegisterComponent implements OnInit {
 
     model = {
         username: '',
-        password: ''
+        plainPassword: '',
+        gender: null,
+        knownAs: '',
+        dateOfBirth: null,
+        city: '',
+        country: ''
     };
 
     private authServiceInterface: AuthServiceInterface;
@@ -33,11 +38,11 @@ class RegisterComponent implements OnInit {
                 this.alertifyServiceInterface.success('Registered Successfully'),
             e => this.alertifyServiceInterface.error(e)
         );
-    }
+    };
 
     cancel = () => {
         this.setIsRegistering();
-    }
+    };
 }
 
 export default RegisterComponent;

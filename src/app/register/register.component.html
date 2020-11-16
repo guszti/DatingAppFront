@@ -3,13 +3,38 @@
     <hr>
 
     <div class="form-group">
+        <input type="text" class="form-control" placeholder="Gender" required name="gender"
+               [(ngModel)]="model.gender">
+    </div>
+
+    <div class="form-group">
         <input type="text" class="form-control" placeholder="Username" required name="username"
                [(ngModel)]="model.username">
     </div>
 
     <div class="form-group">
         <input type="password" class="form-control" placeholder="Password" required name="password"
-               [(ngModel)]="model.password">
+               [(ngModel)]="model.plainPassword">
+    </div>
+
+    <div class="form-group">
+        <input type="date" class="form-control" placeholder="Date of birth" required name="dateOfBirth"
+               [(ngModel)]="model.dateOfBirth">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Country" required name="country"
+               [(ngModel)]="model.country">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="City" required name="city"
+               [(ngModel)]="model.city">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Known as" required name="knownAs"
+               [(ngModel)]="model.knownAs">
     </div>
 
     <div class="form-group text-center">
