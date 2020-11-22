@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment.local';
 import {ApiServiceInterface} from './ApiServiceInterface';
 
@@ -16,7 +16,7 @@ export class ApiService implements ApiServiceInterface {
     }
 
     get = <T>(url: string) =>
-        this.httpClient.get<T>(`${this.apiUrl}${url}`);
+        this.httpClient.get<T>(`${this.apiUrl}${url}`, {observe: 'response'});
 
     post = <T>(url: string, data: any) =>
         this.httpClient.post<T>(`${this.apiUrl}${url}`, data);

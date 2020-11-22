@@ -5,7 +5,7 @@ export type LoginModel = {
 
 export type RegisterModel = {
     username: string;
-    password: string;
+    plainPassword: string;
 };
 
 export type LoginResponse = {
@@ -45,4 +45,11 @@ export type ApiUserPhoto = {
     url: string;
     isMain: boolean;
     description: string;
+};
+
+export type Pagination = {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
 };

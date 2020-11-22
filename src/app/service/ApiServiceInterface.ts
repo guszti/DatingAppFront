@@ -2,7 +2,7 @@ import {Observable} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
 
 export interface ApiServiceInterface {
-    get: <T>(url: string) => Observable<T>;
+    get: <T>(url: string) => Observable<HttpResponse<T>>;
 
     post: <T>(url: string, data: any) => Observable<T>;
 

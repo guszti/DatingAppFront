@@ -7,6 +7,7 @@ import {ApiUser} from '../../../types/commonTypes';
 import {NgForm} from '@angular/forms';
 import {AlertifyService} from '../../../service/alertify.service';
 import {AlertifyServiceInterface} from '../../../service/AlertifyServiceInterface';
+import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-member-edit',
@@ -34,7 +35,9 @@ export class MemberEditComponent implements OnInit {
     fetchUser = () => {
         const id = this.authService.getUserIdFromToken();
 
-        this.apiService.get<ApiUser>(`/users/${id}`).subscribe(user => this.user = user);
+        this.apiService.get<ApiUser>(`/users/${id}`).subscribe(response => {
+            this.user = response.body;
+        });
     };
 
     updateMember = () => {

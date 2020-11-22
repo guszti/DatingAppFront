@@ -44,16 +44,15 @@ export class MemberDetailComponent implements OnInit {
         }
 
         return [];
-    }
+    };
 
     fetchMember = () => {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
 
         this.apiServiceInterface
             .get<ApiUser>(`/users/${id}`)
-            .subscribe(member => {
-                this.member = member;
-                this.getImages(member);
+            .subscribe(response => {
+                this.member = response.body;
             });
-    }
+    };
 }
