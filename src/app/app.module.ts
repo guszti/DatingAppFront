@@ -28,6 +28,7 @@ import {NgxGalleryModule} from '@kolkov/ngx-gallery';
 import { PhotoEditorComponent } from './members/components/photo-editor/photo-editor.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
+import {ButtonsModule} from 'ngx-bootstrap/buttons';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import {PaginationModule} from 'ngx-bootstrap/pagination';
         TabsModule.forRoot(),
         NgxGalleryModule,
         FileUploadModule,
-        PaginationModule.forRoot()
+        PaginationModule.forRoot(),
+        ButtonsModule.forRoot()
     ],
     providers: [
         AuthService,

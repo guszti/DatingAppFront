@@ -22,6 +22,7 @@ export class MembersComponent implements OnInit {
     ];
     @Input() minAge = 18;
     @Input() maxAge = 150;
+    orderBy = 'lastActive';
 
     private apiServiceInterface: ApiServiceInterface;
 
@@ -35,7 +36,7 @@ export class MembersComponent implements OnInit {
 
     fetchMembers = () =>
         this.apiServiceInterface
-            .get<ApiUser[]>(`/users?page=${this.page}&limit=${this.limit}${this.gender ? '&gender=' + this.gender : ''}&minAge=${this.minAge}&maxAge=${this.maxAge}`)
+            .get<ApiUser[]>(`/users?page=${this.page}&limit=${this.limit}${this.gender ? '&gender=' + this.gender : ''}&minAge=${this.minAge}&maxAge=${this.maxAge}&sortBy=${this.orderBy}`)
             .subscribe(response => {
                 this.users = response.body;
 
@@ -54,5 +55,5 @@ export class MembersComponent implements OnInit {
         this.gender = null;
         this.minAge = 18;
         this.maxAge = 150;
-    }
+    };
 }

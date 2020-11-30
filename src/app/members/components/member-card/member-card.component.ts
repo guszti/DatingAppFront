@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ApiUser} from '../../../types/commonTypes';
 import {Router} from '@angular/router';
+import {ApiServiceInterface} from '../../../service/ApiServiceInterface';
+import {ApiService} from '../../../service/api.service';
 
 @Component({
     selector: 'app-member-card',
@@ -11,12 +13,15 @@ export class MemberCardComponent implements OnInit {
     @Input() user: ApiUser;
 
     private router: Router;
+    private apiService: ApiServiceInterface;
 
-    constructor(router: Router) {
+    constructor(router: Router, apiService: ApiService) {
         this.router = router;
+        this.apiService = apiService;
     }
 
     ngOnInit(): void {
     }
 
+    likeUser = (id: number) => this.apiService.post(`/userlike/${id}`, {}).subscribe();
 }

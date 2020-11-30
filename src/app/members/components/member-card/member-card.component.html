@@ -10,7 +10,7 @@
                 <button class="btn btn-primary" routerLink="/members/{{user.id}}"><i class="fa fa-user"></i></button>
             </li>
             <li class="list-inline-item">
-                <button class="btn btn-primary"><i class="fa fa-heart"></i></button>
+                <button class="btn btn-primary" (click)="likeUser(user.id)"><i class="fa fa-heart"></i></button>
             </li>
             <li class="list-inline-item">
                 <button class="btn btn-primary"><i class="fa fa-envelope"></i></button>
@@ -20,7 +20,7 @@
     <div class="card-body p-1">
         <h6 class="card-title text-center mb-1">
             <i class="fa fa-user mr-2"></i>
-            {{ user.knownAs || user.username || 'n/a' }}
+            {{ user.knownAs || user.username || 'n/a' }}, {{user.age}}
         </h6>
         <p class="card-text text-muted text-center">
             {{ user.city || 'n/a' }}
