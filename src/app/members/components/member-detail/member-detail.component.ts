@@ -53,6 +53,8 @@ export class MemberDetailComponent implements OnInit {
             .get<ApiUser>(`/users/${id}`)
             .subscribe(response => {
                 this.member = response.body;
+
+                this.getImages(response.body);
             });
     };
 }

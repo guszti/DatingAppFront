@@ -53,3 +53,14 @@ export type Pagination = {
     total: number;
     totalPages: number;
 };
+
+export type Message = {
+    id: number;
+    createdAt: string;
+    content: string;
+    sourceUsername: string;
+    sourcePhotoUrl: string;
+    targetUsername: string;
+    targetPhotoUrl: string;
+    seenAt: string;
+}

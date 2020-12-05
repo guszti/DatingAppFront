@@ -15,4 +15,18 @@
             <app-member-card [user]="member"></app-member-card>
         </div>
     </div>
+
+    <div class="d-flex justify-content-center" *ngIf="pagination">
+        <pagination
+            [boundaryLinks]="true"
+            [totalItems]="pagination.total"
+            [itemsPerPage]="pagination.limit"
+            [(ngModel)]="pagination.page"
+            (pageChanged)="switchPage($event)"
+            previousText="&lsaquo;"
+            nextText="&rsaquo;"
+            firstText="&laquo;"
+            lastText="&raquo;"
+        ></pagination>
+    </div>
 </div>

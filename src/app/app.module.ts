@@ -29,6 +29,7 @@ import { PhotoEditorComponent } from './members/components/photo-editor/photo-ed
 import {FileUploadModule} from 'ng2-file-upload';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {ButtonsModule} from 'ngx-bootstrap/buttons';
+import { MemberMessagesComponent } from './members/components/member-messages/member-messages.component';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import {ButtonsModule} from 'ngx-bootstrap/buttons';
         MemberCardComponent,
         MemberDetailComponent,
         MemberEditComponent,
-        PhotoEditorComponent
+        PhotoEditorComponent,
+        MemberMessagesComponent
     ],
     imports: [
         BrowserModule,
