@@ -12,7 +12,7 @@ export class MessagesComponent implements OnInit {
     apiService: ApiServiceInterface;
     messages: Message[];
     pagination: Pagination;
-    container: 'Unread' | 'Inbox' | 'Outbox' = 'Unread';
+    container: 'Unread' | 'Inbox' | 'Sent' = 'Unread';
     page = 1;
     limit = 5;
 
@@ -25,7 +25,7 @@ export class MessagesComponent implements OnInit {
     }
 
     loadMessages = () => {
-        this.apiService.get<Message[]>(`/message?page=${this.page}&limit=${this.limit}&predicate=${this.container}`)
+        this.apiService.get<Message[]>(`/message?page=${this.page}&limit=${this.limit}&status=${this.container}`)
             .subscribe(response => {
                 this.messages = response.body;
 
@@ -39,4 +39,12 @@ export class MessagesComponent implements OnInit {
         this.page = event.page;
         this.loadMessages();
     };
+
+    deleteMessage = (id: number) => {
+        this.apiService.delete(`/message/${id}`).subscribe(() => {
+            const messageIndex = this.messages.findIndex(message => message.id === id);
+
+            this.messages.splice(messageIndex, 1);
+        });
+    }
 }
