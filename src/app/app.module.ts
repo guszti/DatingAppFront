@@ -30,6 +30,12 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {ButtonsModule} from 'ngx-bootstrap/buttons';
 import { MemberMessagesComponent } from './members/components/member-messages/member-messages.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './directives/has-role.directive';
+import { UserManagementComponent } from './admin/admin-panel/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/admin-panel/photo-management/photo-management.component';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +51,13 @@ import { MemberMessagesComponent } from './members/components/member-messages/me
         MemberDetailComponent,
         MemberEditComponent,
         PhotoEditorComponent,
-        MemberMessagesComponent
+        MemberMessagesComponent,
+        AdminPanelComponent,
+        AdminPanelComponent,
+        HasRoleDirective,
+        UserManagementComponent,
+        PhotoManagementComponent,
+        RolesModalComponent
     ],
     imports: [
         BrowserModule,
@@ -58,7 +70,8 @@ import { MemberMessagesComponent } from './members/components/member-messages/me
         NgxGalleryModule,
         FileUploadModule,
         PaginationModule.forRoot(),
-        ButtonsModule.forRoot()
+        ButtonsModule.forRoot(),
+        ModalModule.forRoot()
     ],
     providers: [
         AuthService,

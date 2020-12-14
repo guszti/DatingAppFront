@@ -14,6 +14,7 @@ export type LoginResponse = {
         username: string;
         token: string;
         photoUrl: string;
+        roles: string[];
     };
 };
 
@@ -38,6 +39,7 @@ export type ApiUser = {
     mainPhotoUrl: string;
     photos: ApiUserPhoto[];
     createdAt: string;
+    roles: string[];
 };
 
 export type ApiUserPhoto = {

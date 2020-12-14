@@ -35,6 +35,11 @@ export class AuthService implements AuthServiceInterface {
                     localStorage.setItem('username', response.user.username);
                     localStorage.setItem('photoUrl', response.user.photoUrl);
 
+                    const tokenRoles = this.jwtHelperService.decodeToken(response.user.token).role;
+                    const roles = tokenRoles instanceof Array ? tokenRoles : [tokenRoles];
+
+                    localStorage.setItem('roles', JSON.stringify(roles));
+
                     this.router.navigateByUrl('/home');
                 }
             })
