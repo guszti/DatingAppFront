@@ -3,6 +3,7 @@ import {ApiUser} from '../../../types/commonTypes';
 import {Router} from '@angular/router';
 import {ApiServiceInterface} from '../../../service/ApiServiceInterface';
 import {ApiService} from '../../../service/api.service';
+import {PresenceService} from '../../../service/presence.service';
 
 @Component({
     selector: 'app-member-card',
@@ -15,7 +16,7 @@ export class MemberCardComponent implements OnInit {
     private router: Router;
     private apiService: ApiServiceInterface;
 
-    constructor(router: Router, apiService: ApiService) {
+    constructor(router: Router, apiService: ApiService, public presenceService: PresenceService) {
         this.router = router;
         this.apiService = apiService;
     }

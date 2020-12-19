@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '../../../service/api.service';
 import {ApiServiceInterface} from '../../../service/ApiServiceInterface';
 import {ApiUser} from '../../../types/commonTypes';
 import {ActivatedRoute} from '@angular/router';
 import {NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions} from '@kolkov/ngx-gallery';
+import {PresenceService} from '../../../service/presence.service';
+import {MessageService} from '../../../service/message.service';
 
 @Component({
     selector: 'app-member-detail',
     templateUrl: './member-detail.component.html',
     styleUrls: ['./member-detail.component.css']
 })
-export class MemberDetailComponent implements OnInit {
+export class MemberDetailComponent implements OnInit, OnDestroy {
     member: ApiUser;
     galleryImages: NgxGalleryImage[];
     galleryOptions: NgxGalleryOptions[] = [{
@@ -25,13 +27,23 @@ export class MemberDetailComponent implements OnInit {
     private apiServiceInterface: ApiServiceInterface;
     private activatedRoute: ActivatedRoute;
 
-    constructor(apiServiceInterface: ApiService, activatedRoute: ActivatedRoute) {
+    constructor(
+        apiServiceInterface: ApiService,
+        activatedRoute: ActivatedRoute,
+        public presenceService: PresenceService,
+        public messageService: MessageService
+    ) {
         this.apiServiceInterface = apiServiceInterface;
         this.activatedRoute = activatedRoute;
     }
 
     ngOnInit(): void {
         this.fetchMember();
+        this.messageService.createHubConnection(this.member.id, this.member.username);
+    }
+
+    ngOnDestroy(): void {
+        this.messageService.stopHubConnection();
     }
 
     getImages = (member: ApiUser) => {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HubConnection, HubConnectionBuilder} from '@microsoft/signalr';
 import {BehaviorSubject} from 'rxjs';
-import {ApiUser, Message} from '../types/commonTypes';
+import {ApiUser, Group, Message} from '../types/commonTypes';
 import {environment} from '../../environments/environment.local';
 import {take} from 'rxjs/operators';
 
@@ -16,7 +16,7 @@ export class MessageService {
     constructor() {
     }
 
-    createHubConnection = (targetUserId: number) => {
+    createHubConnection = (targetUserId: number, targetUsername: string) => {
         this.hubConnection = new HubConnectionBuilder()
             .withUrl(`/${environment.hubUrl}/mewssage?user=${targetUserId}`, {
                 accessTokenFactory: () => localStorage.getItem('token')
@@ -34,6 +34,20 @@ export class MessageService {
             this.messageThread$.pipe(take(1)).subscribe(messages => {
                 this.messageThreadSource.next([...messages, message]);
             });
+        });
+
+        this.hubConnection.on('UpdatedGroup', (group: Group) => {
+            if (group.connections.some(x => x.username === targetUsername)) {
+                this.messageThread$.pipe(take(1)).subscribe(messages => {
+                    messages.forEach(message => {
+                        if (!message.seenAt) {
+                            message.seenAt = new Date(Date.now());
+                        }
+                    });
+
+                    this.messageThreadSource.next([...messages]);
+                });
+            }
         });
     };
 

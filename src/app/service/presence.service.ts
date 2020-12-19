@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment.local';
 import {HubConnection, HubConnectionBuilder} from '@microsoft/signalr';
 import {AlertifyService} from './alertify.service';
-import {ApiUser} from '../types/commonTypes';
 import {BehaviorSubject} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -29,16 +29,24 @@ export class PresenceService {
             .start()
             .catch(error => console.log(error));
 
-        this.hubConnection.on('UserIsOnline', username => {
-            this.alertifyService.warning(username + ' connected');
+        this.hubConnection.on('UserIsOnline', userId => {
+            this.onlineUsers$.pipe(take(1)).subscribe(userIds => {
+                this.onlineUsersSource.next([...userIds, userId]);
+            });
         });
 
-        this.hubConnection.on('UserIsOffline', username => {
-            this.alertifyService.warning(username + ' offline');
+        this.hubConnection.on('UserIsOffline', userId => {
+            this.onlineUsers$.pipe(take(1)).subscribe(userIds => {
+                this.onlineUsersSource.next([...userIds.filter(id => id !== userId)]);
+            });
         });
 
         this.hubConnection.on('GetOnlineUsers', (userIds: number[]) => {
             this.onlineUsersSource.next(userIds);
+        });
+
+        this.hubConnection.on('NewMessageReceived', ({username, knownAs}) => {
+            this.alertifyService.message(`${knownAs || username} sent you a message!`);
         });
     }
 

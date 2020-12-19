@@ -40,6 +40,7 @@ export type ApiUser = {
     photos: ApiUserPhoto[];
     createdAt: string;
     roles: string[];
+    token: string;
 };
 
 export type ApiUserPhoto = {
@@ -64,5 +65,15 @@ export type Message = {
     sourcePhotoUrl: string;
     targetUsername: string;
     targetPhotoUrl: string;
-    seenAt: string;
-}
+    seenAt: string | Date;
+};
+
+export type Group = {
+    name: string;
+    connections: Connection[];
+};
+
+export type Connection = {
+    connectionId: string;
+    username: string;
+};

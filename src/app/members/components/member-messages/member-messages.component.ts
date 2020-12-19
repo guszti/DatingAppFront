@@ -3,6 +3,7 @@ import {Message} from '../../../types/commonTypes';
 import {ApiServiceInterface} from '../../../service/ApiServiceInterface';
 import {ApiService} from '../../../service/api.service';
 import {NgForm} from '@angular/forms';
+import {MessageService} from '../../../service/message.service';
 
 @Component({
     selector: 'app-member-messages',
@@ -17,7 +18,7 @@ export class MemberMessagesComponent implements OnInit {
     messages: Message[];
     messageContent: string;
 
-    constructor(apiService: ApiService) {
+    constructor(apiService: ApiService, public messageService: MessageService) {
         this.apiService = apiService;
     }
 
@@ -30,9 +31,6 @@ export class MemberMessagesComponent implements OnInit {
             this.messages = response.body;
         });
 
-    sendMessage = () => this.apiService.post<Message>(`/message`, {targetUserId: this.userId, content: this.messageContent})
-        .subscribe(response => {
-            this.messages.push(response);
-            this.messageForm.reset();
-        });
+    sendMessage = () => this.messageService.sendMessage(this.userId, this.messageContent)
+        .then(() => this.messageForm.reset());
 }

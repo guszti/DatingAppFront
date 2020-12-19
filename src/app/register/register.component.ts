@@ -34,10 +34,7 @@ class RegisterComponent implements OnInit {
     }
 
     register = () => {
-        this.authServiceInterface.register(this.model).subscribe(() =>
-                this.alertifyServiceInterface.success('Registered Successfully'),
-            e => this.alertifyServiceInterface.error(e)
-        );
+        this.authServiceInterface.register(this.model);
     };
 
     cancel = () => {
