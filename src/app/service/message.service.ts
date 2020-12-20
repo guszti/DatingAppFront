@@ -4,6 +4,7 @@ import {BehaviorSubject} from 'rxjs';
 import {ApiUser, Group, Message} from '../types/commonTypes';
 import {environment} from '../../environments/environment.local';
 import {take} from 'rxjs/operators';
+import {AlertifyService} from './alertify.service';
 
 @Injectable({
     providedIn: 'root',
@@ -18,13 +19,16 @@ export class MessageService {
 
     createHubConnection = (targetUserId: number, targetUsername: string) => {
         this.hubConnection = new HubConnectionBuilder()
-            .withUrl(`/${environment.hubUrl}/mewssage?user=${targetUserId}`, {
+            .withUrl(`${environment.hubUrl}/message?user=${targetUserId}`, {
                 accessTokenFactory: () => localStorage.getItem('token')
             })
             .withAutomaticReconnect()
             .build();
 
-        this.hubConnection.start().catch(error => console.log(error));
+        this.hubConnection.start()
+            .then(() => console.log('connection started'))
+            .catch(error => console.log(error));
+
 
         this.hubConnection.on('ReceiveMessageThread', messages => {
             this.messageThreadSource.next(messages);
@@ -53,7 +57,7 @@ export class MessageService {
 
     stopHubConnection = () => this.hubConnection.stop();
 
-    sendMessage = (targetUserId: number, content: string) => this.hubConnection
+    sendMessage = async (targetUserId: number, content: string) => this.hubConnection
         .invoke('SendMessage', {targetUserId, content})
         .catch(error => console.log(error));
 }

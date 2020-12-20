@@ -39,11 +39,10 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.fetchMember();
-        this.messageService.createHubConnection(this.member.id, this.member.username);
     }
 
     ngOnDestroy(): void {
-        this.messageService.stopHubConnection();
+        this.messageService.stopHubConnection().then(() => console.log('Connection stopped'));
     }
 
     getImages = (member: ApiUser) => {
@@ -65,7 +64,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
             .get<ApiUser>(`/users/${id}`)
             .subscribe(response => {
                 this.member = response.body;
-
+                this.messageService.createHubConnection(this.member.id, this.member.username);
                 this.getImages(response.body);
             });
     };

@@ -17,7 +17,7 @@ export class PresenceService {
     constructor(private alertifyService: AlertifyService) {
     }
 
-    createHubConnection(token: string) {
+    createHubConnection = (token: string) => {
         this.hubConnection = new HubConnectionBuilder()
             .withUrl(`${this.hubUrl}/presence`, {
                 accessTokenFactory: () => token
